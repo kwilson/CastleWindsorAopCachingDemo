@@ -1,0 +1,47 @@
+﻿@model Tripsis.AopDemo.StockReading
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Stock Checker</h1>
+
+@using (Html.BeginForm("Index", "Home"))
+{
+    var symbol = Model != null ? Model.Symbol : string.Empty;
+    
+    <label for="symbol">
+        Enter the stock symbol        
+        <input type="text" id="symbol" name="symbol" placeholder="e.g. AAPL" value="@symbol" />
+    </label>
+    
+    <input type="submit" value="Look Up" />
+}
+
+@if (TempData["Message"] != null)
+{
+    <p>@TempData["Message"].ToString()</p>
+}
+
+@if (Model != null)
+{
+    <h1>Stock Info for @Model.Name</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Symbol</td>
+                <td>@Model.Name</td>
+                <td>@Model.LastPrice</td>
+                <td>@Model.TimeStamp</td>
+            </tr>
+        </tbody>
+    </table>
+}
